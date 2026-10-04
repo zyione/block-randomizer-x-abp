@@ -44,3 +44,45 @@ tasks.register('selectionTest', JavaExec) {
     mainClass = 'SelectionTest'
 }
 check.dependsOn selectionTest
+
+
+// Mixin reserves its configured package and every subpackage. Main classes and
+// helpers in that namespace cause IllegalClassLoadError at game startup.
+tasks.register('verifyModPackaging') {
+    dependsOn remapJar
+    inputs.file(tasks.remapJar.archiveFile)
+    doLast {
+        def jarFile = tasks.remapJar.archiveFile.get().asFile
+        def archive = new java.util.zip.ZipFile(jarFile)
+        try {
+            def parser = new groovy.json.JsonSlurper()
+            def metadata = parser.parse(archive.getInputStream(archive.getEntry('fabric.mod.json')))
+            metadata.mixins.each { spec ->
+                def name = spec instanceof Map ? spec.config : spec
+                def config = parser.parse(archive.getInputStream(archive.getEntry(name)))
+                def prefix = config.package + '.'
+                def directory = prefix.replace('.', '/')
+                def declared = ((config.mixins ?: []) + (config.client ?: []) + (config.server ?: []))
+                    .collect { directory + it.replace('.', '/') + '.class' } as Set
+                declared.each { classFile ->
+                    if (archive.getEntry(classFile) == null) throw new GradleException("Missing mixin: ${classFile}")
+                }
+                archive.entries().each { entry ->
+                    if (entry.name.startsWith(directory) && entry.name.endsWith('.class') && !declared.contains(entry.name)) {
+                        throw new GradleException("Non-mixin class in reserved package: ${entry.name}")
+                    }
+                }
+                metadata.entrypoints.values().flatten().each { entry ->
+                    def className = entry instanceof Map ? entry.value : entry
+                    if (className.startsWith(prefix)) throw new GradleException("Entrypoint in reserved mixin package: ${className}")
+                    if (archive.getEntry(className.replace('.', '/') + '.class') == null) {
+                        throw new GradleException("Missing entrypoint: ${className}")
+                    }
+                }
+                if (config.refmap && archive.getEntry(config.refmap) == null) throw new GradleException('Missing mixin refmap')
+            }
+            logger.lifecycle('PASS: mixin package contains only declared mixins; entrypoints are outside it; refmap is present')
+        } finally { archive.close() }
+    }
+}
+check.dependsOn verifyModPackaging

@@ -1,4 +1,6 @@
-package local.hotbarrandomizer;
+package local.hotbarrandomizer.mixin;
+
+import local.hotbarrandomizer.Randomizer;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;

@@ -6,7 +6,7 @@ A lightweight, client-side **Fabric 1.20.1** mod that randomly selects block ite
 
 ## Download and install
 
-Download [Hotbar Randomizer 1.0.0 for Fabric 1.20.1](downloads/hotbar-randomizer-1.0.0+mc1.20.1.jar) using GitHub's download button.
+Download [Hotbar Randomizer 1.0.1 for Fabric 1.20.1](downloads/hotbar-randomizer-1.0.1+mc1.20.1.jar) using GitHub's download button.
 
 1. Install Fabric Loader, [Fabric API](https://modrinth.com/mod/fabric-api), and [Cloth Config 11](https://modrinth.com/mod/cloth-config) for Minecraft 1.20.1.
 2. Close Minecraft and copy the JAR into your instance's `mods` folder.
@@ -45,7 +45,7 @@ Windows:
 .\gradlew.bat build
 ```
 
-The installable JAR appears in `build/libs/hotbar-randomizer-1.0.0+mc1.20.1.jar`. Do not install the `-sources.jar` file. `build` runs the selection tests. GitHub Actions also builds and uploads artifacts for pushes and pull requests.
+The installable JAR appears in `build/libs/hotbar-randomizer-1.0.1+mc1.20.1.jar`. Do not install the `-sources.jar` file. `build` runs the selection tests. GitHub Actions also builds and uploads artifacts for pushes and pull requests.
 
 ## Compatibility and validation
 
@@ -53,6 +53,6 @@ Targets Minecraft 1.20.1, Java 17+, Fabric, Cloth Config 11, and optional Mod Me
 
 Automatic switches happen after the placement packet is sent, allowing the next interaction to synchronize the selected slot. No extra placement cooldown is introduced. Existing placement rules still apply: flowers need suitable ground, torches need support, and some block types do not support ABP's fast placement. Failed placement keeps the current block selected. Client prediction cannot immediately detect a server rejecting placement.
 
-The standalone Gradle build passes, including 42,003 selections covering empty and depleted slots, single blocks, duplicate types, avoiding repeats, and probability distribution. Java 17 class versions, generated Fabric mixin mappings, placement target signatures and ABP's tracking field were checked. **Live gameplay testing remains necessary**, both with and without ABP, including sustained right-click, creative/survival, depleted stacks and category exclusions.
+The standalone Gradle build verifies that only declared mixin classes live in the reserved mixin package and that entrypoints remain outside it. It passes, including 42,003 selections covering empty and depleted slots, single blocks, duplicate types, avoiding repeats, and probability distribution. Java 17 class versions, generated Fabric mixin mappings, placement target signatures and ABP's tracking field were checked. **Live gameplay testing remains necessary**, both with and without ABP, including sustained right-click, creative/survival, depleted stacks and category exclusions.
 
 MIT licensed. Local instance-specific references and backups are kept outside the published source under ignored `local-reference/` when present.

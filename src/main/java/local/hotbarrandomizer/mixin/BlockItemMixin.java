@@ -1,4 +1,6 @@
-package local.hotbarrandomizer;
+package local.hotbarrandomizer.mixin;
+
+import local.hotbarrandomizer.Randomizer;
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
