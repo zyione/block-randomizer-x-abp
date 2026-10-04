@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "local.hotbarrandomizer",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "BlockItemMixin",
+    "InteractionMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "hotbar-randomizer-refmap.json"
+}

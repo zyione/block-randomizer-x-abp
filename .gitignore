@@ -1,0 +1,13 @@
+.gradle/
+.gradle-user-home/
+build/
+run/
+out/
+.idea/
+*.iml
+.vscode/
+local-reference/
+*.log
+*.tmp
+__pycache__/
+.DS_Store

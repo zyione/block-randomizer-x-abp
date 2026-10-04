@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "hotbar_randomizer",
+  "version": "${version}",
+  "name": "Hotbar Randomizer",
+  "description": "Lightweight block-only hotbar randomization after successful placements, with Accurate Block Placement 1.2.1 compatibility.",
+  "environment": "client",
+  "license": "MIT",
+  "entrypoints": {
+    "client": [
+      "local.hotbarrandomizer.Randomizer"
+    ],
+    "modmenu": [
+      "local.hotbarrandomizer.Menu"
+    ]
+  },
+  "mixins": [
+    "hotbar-randomizer.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": "1.20.1",
+    "java": ">=17",
+    "fabric-api": "*",
+    "cloth-config": ">=11.0.0"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "accurateblockplacement": "1.2.1"
+  },
+  "breaks": {
+    "randomblockplacement": "*"
+  },
+  "authors": [
+    "zyione"
+  ],
+  "contact": {
+    "sources": "https://github.com/zyione/block-randomizer-x-abp",
+    "issues": "https://github.com/zyione/block-randomizer-x-abp/issues"
+  }
+}
