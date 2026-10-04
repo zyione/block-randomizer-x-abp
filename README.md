@@ -10,8 +10,7 @@ Download [Hotbar Randomizer 1.0.1 for Fabric 1.20.1](downloads/hotbar-randomizer
 
 1. Install Fabric Loader, [Fabric API](https://modrinth.com/mod/fabric-api), and [Cloth Config 11](https://modrinth.com/mod/cloth-config) for Minecraft 1.20.1.
 2. Close Minecraft and copy the JAR into your instance's `mods` folder.
-3. Remove or disable the old `randomblockplacement` mod. The two randomizers conflict.
-4. Launch Minecraft and press **P** to toggle randomization. Rebind it in Controls → Key Binds → Hotbar Randomizer.
+3. Launch Minecraft and press **P** to toggle randomization. Rebind it in Controls → Key Binds → Hotbar Randomizer.
 
 [Mod Menu](https://modrinth.com/mod/modmenu) is optional and provides the settings screen. Install [Accurate Block Placement Reborn 1.2.1](https://modrinth.com/mod/accurate-block-placement-reborn/version/1.2.1) if you want its faster held-right-click placement. No server installation is needed.
 
